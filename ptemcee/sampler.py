@@ -221,9 +221,10 @@ class LikePriorEvaluator(object):
         else:
             inds_fix = np.isinf(lp)
             inds_good = np.arange(x.shape[0])[inds_fix == False]
+            ll = np.zeros(x.shape[0])
             if len(inds_good) > 0:
                 x[inds_fix] = x[inds_good[0]]
-                ll = self.logl(x)
+                ll[:] = self.logl(x)
             ll[inds_fix] = 0.0
 
         """if lp == float("-inf"):
